@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class SistemaTrocaMensagens {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Solicita os nomes dos usuários
+        System.out.print("Digite o nome do primeiro usuário: ");
+        String usuario1 = scanner.nextLine();
+        System.out.print("Digite o nome do segundo usuário: ");
+        String usuario2 = scanner.nextLine();
+
+        // Array para armazenar as mensagens trocadas
+        String[] mensagens = new String[10];
+
+        // Loop para alternar as mensagens
+        for (int i = 0; i < 10; i++) {
+            if (i % 2 == 0) {
+                // Usuário 1 envia a mensagem
+                System.out.print(usuario1 + ", digite sua mensagem: ");
+                mensagens[i] = scanner.nextLine();
+            } else {
+                // Usuário 2 envia a mensagem
+                System.out.print(usuario2 + ", digite sua mensagem: ");
+                mensagens[i] = scanner.nextLine();
+            }
+        }
+
+        // Exibe o histórico de mensagens
+        System.out.println("\n===== Histórico de Mensagens =====");
+        for (int i = 0; i < 10; i++) {
+            if (i % 2 == 0) {
+                System.out.println(usuario1 + ": " + mensagens[i]);
+            } else {
+                System.out.println(usuario2 + ": " + mensagens[i]);
+            }
+        }
+
+        // Mensagem final de despedida
+        System.out.println("\nObrigado por utilizarem o sistema! Boa sorte para vocês! 🚀");
+
+        scanner.close();
+    }
+}
