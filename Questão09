@@ -1,0 +1,58 @@
+// Classe ContaBancaria
+class ContaBancaria {
+    private String titular;
+    private double saldo;
+
+    // Construtor para inicializar titular e saldo
+    public ContaBancaria(String titular, double saldoInicial) {
+        this.titular = titular;
+        this.saldo = saldoInicial;
+    }
+
+    // Método para depositar valor na conta
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor;
+            System.out.printf("Deposito de R$ %.2f realizado com sucesso.\n", valor);
+        } else {
+            System.out.println("Valor do depósito deve ser positivo.");
+        }
+    }
+
+    // Método para sacar valor da conta
+    public void sacar(double valor) {
+        if (valor > 0 && valor <= saldo) {
+            saldo -= valor;
+            System.out.printf("Saque de R$ %.2f realizado com sucesso.\n", valor);
+        } else if (valor > saldo) {
+            System.out.println("Saldo insuficiente para o saque.");
+        } else {
+            System.out.println("Valor do saque deve ser positivo.");
+        }
+    }
+
+    // Método para exibir o saldo da conta
+    public void exibirSaldo() {
+        System.out.printf("Saldo atual: R$ %.2f\n", saldo);
+    }
+}
+
+// Classe principal para teste do sistema de conta bancária
+public class SistemaBancario {
+    public static void main(String[] args) {
+        // Criando uma conta bancária para o cliente
+        ContaBancaria conta = new ContaBancaria("João Silva", 1000.00);
+
+        // Exibindo saldo inicial
+        System.out.println("Conta criada com sucesso.");
+        conta.exibirSaldo();
+
+        // Realizando depósitos e saques
+        conta.depositar(500.00); // Depósito válido
+        conta.sacar(200.00);     // Saque válido
+        conta.sacar(2000.00);    // Tentativa de saque maior que o saldo
+
+        // Exibindo saldo final
+        conta.exibirSaldo();
+    }
+}
