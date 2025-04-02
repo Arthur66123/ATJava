@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+// Classe principal para execução do programa
+public class CalculadoraImposto {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Solicita o nome do usuário
+        System.out.print("Digite seu nome: ");
+        String nome = scanner.nextLine();
+        
+        // Solicita o salário mensal do usuário
+        System.out.print("Digite seu salário mensal: ");
+        double salarioMensal = scanner.nextDouble();
+        
+        // Calcula o salário anual
+        double salarioAnual = salarioMensal * 12;
+        
+        // Calcula o imposto de renda
+        double imposto = calcularImposto(salarioAnual);
+        double salarioLiquido = salarioAnual - imposto;
+        
+        // Exibe os resultados
+        System.out.println("\nNome: " + nome);
+        System.out.printf("Salário Anual: R$ %.2f\n", salarioAnual);
+        System.out.printf("Imposto de Renda: R$ %.2f\n", imposto);
+        System.out.printf("Salário Líquido: R$ %.2f\n", salarioLiquido);
+        
+        scanner.close(); // Fecha o scanner para evitar vazamento de recursos
+    }
+    
+    // Método para calcular o imposto de renda com base na tabela
+    public static double calcularImposto(double salarioAnual) {
+        if (salarioAnual <= 22847.76) {
+            return 0; // Isento
+        } else if (salarioAnual <= 33919.80) {
+            return salarioAnual * 0.075;
+        } else if (salarioAnual <= 45012.60) {
+            return salarioAnual * 0.15;
+        } else {
+            return salarioAnual * 0.275;
+        }
+    }
+}
