@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+// Classe principal para execução do programa
+public class SimuladorEmprestimo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Solicita o nome do cliente
+        System.out.print("Digite seu nome: ");
+        String nome = scanner.nextLine();
+        
+        // Solicita o valor do empréstimo
+        System.out.print("Digite o valor do empréstimo: ");
+        double valorEmprestimo = scanner.nextDouble();
+        
+        int parcelas;
+        
+        // Solicita a quantidade de parcelas dentro do intervalo permitido
+        while (true) {
+            System.out.print("Digite a quantidade de parcelas (entre 6 e 48): ");
+            parcelas = scanner.nextInt();
+            if (parcelas >= 6 && parcelas <= 48) {
+                break;
+            } else {
+                System.out.println("Número de parcelas inválido. Escolha entre 6 e 48.");
+            }
+        }
+        
+        // Define a taxa de juros mensal
+        double taxaJuros = 0.03;
+        
+        // Calcula o valor total a ser pago considerando juros compostos
+        double valorTotalPago = valorEmprestimo * Math.pow((1 + taxaJuros), parcelas);
+        
+        // Calcula o valor da parcela mensal
+        double valorParcela = valorTotalPago / parcelas;
+        
+        // Exibe os resultados
+        System.out.println("\nNome: " + nome);
+        System.out.printf("Valor Total Pago: R$ %.2f\n", valorTotalPago);
+        System.out.printf("Valor da Parcela Mensal: R$ %.2f\n", valorParcela);
+        
+        scanner.close(); // Fecha o scanner para evitar vazamento de recursos
+    }
+}
