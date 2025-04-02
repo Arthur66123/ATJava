@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+// Classe principal para execução do programa
+public class SistemaCadastro {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Solicita o nome do usuário
+        System.out.print("Digite seu nome: ");
+        String nome = scanner.nextLine();
+        
+        String senha;
+        
+        // Loop para solicitar uma senha válida
+        while (true) {
+            System.out.print("Digite sua senha: ");
+            senha = scanner.nextLine();
+            
+            // Verifica se a senha atende aos critérios de segurança
+            if (!ValidadorSenha.senhaValida(senha)) {
+                System.out.println("Senha inválida! A senha deve conter no mínimo 8 caracteres, pelo menos uma letra maiúscula, um número e um caractere especial (@, #, $, etc.).");
+            } else {
+                break; // Sai do loop se a senha for válida
+            }
+        }
+        
+        // Confirmação de cadastro bem-sucedido
+        System.out.println("Cadastro realizado com sucesso!");
+        scanner.close(); // Fecha o scanner para evitar vazamento de recursos
+    }
+}
+
+// Classe separada para validação de senha
+class ValidadorSenha {
+    public static boolean senhaValida(String senha) {
+        return senha.length() >= 8 && // Mínimo 8 caracteres
+               senha.matches(".*[A-Z].*") && // Pelo menos uma letra maiúscula
+               senha.matches(".*\\d.*") && // Pelo menos um número
+               senha.matches(".*[@#$%^&+=].*"); // Pelo menos um caractere especial
+    }
+}
