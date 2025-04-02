@@ -1,0 +1,63 @@
+// Classe base Funcionario
+class Funcionario {
+    protected String nome;
+    protected double salarioBase;
+
+    // Construtor
+    public Funcionario(String nome, double salarioBase) {
+        this.nome = nome;
+        this.salarioBase = salarioBase;
+    }
+
+    // Método para calcular o salário final (a ser sobrescrito nas subclasses)
+    public double calcularSalario() {
+        return salarioBase;
+    }
+
+    // Método para exibir o nome e salário
+    public void exibirSalario() {
+        System.out.printf("%s - Salário: R$ %.2f\n", nome, calcularSalario());
+    }
+}
+
+// Subclasse Gerente
+class Gerente extends Funcionario {
+
+    public Gerente(String nome, double salarioBase) {
+        super(nome, salarioBase);
+    }
+
+    // Sobrescreve o método calcularSalario() com bônus de 20%
+    @Override
+    public double calcularSalario() {
+        return salarioBase * 1.2; // 20% de bônus
+    }
+}
+
+// Subclasse Estagiario
+class Estagiario extends Funcionario {
+
+    public Estagiario(String nome, double salarioBase) {
+        super(nome, salarioBase);
+    }
+
+    // Sobrescreve o método calcularSalario() com desconto de 10%
+    @Override
+    public double calcularSalario() {
+        return salarioBase * 0.9; // 10% de desconto
+    }
+}
+
+// Classe principal para execução do programa
+public class SistemaSalarios {
+    public static void main(String[] args) {
+        // Criando objetos Gerente e Estagiário
+        Funcionario gerente = new Gerente("Carlos Silva", 5000);
+        Funcionario estagiario = new Estagiario("Ana Costa", 1500);
+
+        // Exibindo os salários finais
+        System.out.println("Salários finais:");
+        gerente.exibirSalario();
+        estagiario.exibirSalario();
+    }
+}
